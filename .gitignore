@@ -1,0 +1,29 @@
+# Environment files (contain real secrets, never commit)
+.env
+.env.local
+.env*.local
+!.env.example
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+.next/
+next-env.d.ts
+
+# Build artifacts
+dist/
+build/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Alembic (keep migration files themselves, ignore nothing extra needed here, alembic files should be tracked)

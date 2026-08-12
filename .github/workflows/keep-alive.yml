@@ -1,0 +1,22 @@
+name: Keep-alive ping
+
+# Pings the backend's /health endpoint every 3 days so a free-tier deployment
+# doesn't spin down from inactivity, and so a broken deploy shows up as a
+# failed Actions run instead of silently sitting unreachable.
+#
+# IMPORTANT: this workflow is INERT until the Railway deployment is actually
+# live. https://api.bssupport.care/health is a placeholder - update it to the
+# real deployed URL once Railway is set up, or every scheduled run below will
+# just fail with a connection error.
+
+on:
+  schedule:
+    - cron: "0 6 */3 * *" # every 3 days at 06:00 UTC
+  workflow_dispatch: {} # allows a manual "Run workflow" click for testing
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health check
+        run: curl -sf --max-time 15 https://api.bssupport.care/health

@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #16201D;
+  --color-paper: #E9E6DA;
+  --color-paper-raised: #F5F2E8;
+  --color-teal: #0B6B72;
+  --color-teal-deep: #08494E;
+  /* Accessibility exception: standard --color-teal is too dark for text/accent use
+     directly on bg-ink (dark-on-dark). This lighter variant exists specifically
+     for that use case - do not use it on light backgrounds, use --color-teal there. */
+  --color-teal-bright: #12A6AF;
+  --color-ochre: #C98A2E;
+  --color-ochre-deep: #8F5F16;
+  --color-moss: #3F7A32;
+  --color-moss-deep: #2C561F;
+  --color-brick: #C23B2E;
+  --color-brick-deep: #8C2A20;
+
+  --font-display: var(--font-zilla), Georgia, serif;
+  --font-body: Calibri, Carlito, "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", Consolas, monospace;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+@keyframes slidein {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popin {
+  from { transform: scale(0.9) translateY(8px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
