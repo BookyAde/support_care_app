@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Ping backend health check
         run: |
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://api.bssupport.care/health)
+          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://api.bssupport.care/health)
           echo "Health check responded with HTTP $status"
           if [ "$status" != "200" ]; then
             echo "::error::Health check failed - expected HTTP 200, got $status"

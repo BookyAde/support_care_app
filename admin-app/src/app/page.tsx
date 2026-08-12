@@ -3,6 +3,7 @@ import PublicNav from "@/components/PublicNav";
 import TeamCarousel from "@/components/TeamCarousel";
 import SignInDropdown from "@/components/SignInDropdown";
 import { buttonClasses } from "@/components/ui/Button";
+import { AtSign } from "lucide-react";
 
 const HERO_STATS = [
   { value: "100%", label: "Visits GPS-verified", color: "text-teal-bright" },
@@ -311,9 +312,18 @@ export default function Home() {
                 Contact
               </p>
               <p className="text-[13.5px] text-paper-raised/70 mb-2">support@bssupport.care</p>
-              <p className="text-[12.5px] text-paper-raised/45 leading-relaxed">
+              <p className="text-[12.5px] text-paper-raised/45 leading-relaxed mb-4">
                 This is an internal system for agency staff and clients. There is no public sign-up.
               </p>
+              <a
+                href="https://instagram.com/Bountifulsupport_plus"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Bountiful Support Plus on Instagram"
+                className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/15 text-paper-raised/60 hover:text-paper-raised hover:border-white/30 transition"
+              >
+                <AtSign className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
