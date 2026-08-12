@@ -26,6 +26,8 @@ class Settings(BaseSettings):
     # --- Email (for auto-generated worker credentials) ---
     RESEND_API_KEY: str = ""
     EMAIL_FROM_ADDRESS: str = "no-reply@supportcare.app"
+    # Where public contact-form submissions get delivered
+    SUPPORT_EMAIL_ADDRESS: str = "support@bssupport.care"
 
     # --- Frontend URLs (for login links/CTAs in emails) ---
     # Three separate Next.js apps on three separate origins - local dev ports

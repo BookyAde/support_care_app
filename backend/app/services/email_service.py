@@ -392,11 +392,12 @@ def send_contact_message_email(
     visitor_email: str,
     message: str,
 ) -> bool:
-    """Public marketing-site contact form -> support@bssupport.care. reply_to is
-    set to the visitor's own address so support can hit reply and land straight
-    in the visitor's inbox, no copy-pasting their email out of the body first.
-    Internal-facing (goes to the support team, not a customer/teammate) so it
-    deliberately stays a plain notification rather than the branded template."""
+    """Public marketing-site contact form -> settings.SUPPORT_EMAIL_ADDRESS.
+    reply_to is set to the visitor's own address so support can hit reply and
+    land straight in the visitor's inbox, no copy-pasting their email out of
+    the body first. Internal-facing (goes to the support team, not a
+    customer/teammate) so it deliberately stays a plain notification rather
+    than the branded template."""
     if not settings.RESEND_API_KEY:
         logger.warning("RESEND_API_KEY not set - skipping contact message email send.")
         return False
@@ -405,7 +406,7 @@ def send_contact_message_email(
         resend.Emails.send(
             {
                 "from": settings.EMAIL_FROM_ADDRESS,
-                "to": ["support@bssupport.care"],
+                "to": [settings.SUPPORT_EMAIL_ADDRESS],
                 "reply_to": visitor_email,
                 "subject": f"New contact form message from {visitor_name}",
                 "html": f"""

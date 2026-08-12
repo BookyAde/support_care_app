@@ -1,17 +1,23 @@
 name: Keep-alive ping
 
-# Pings the backend's /health endpoint every 3 days so a free-tier deployment
-# doesn't spin down from inactivity, and so a broken deploy shows up as a
-# failed Actions run instead of silently sitting unreachable.
+# Pings the backend's /health endpoint every 10 minutes. This does double
+# duty against two separate free-tier inactivity risks:
+#   1. Supabase pauses the database after a stretch of inactivity (measured
+#      in days) - a periodic hit keeps the project counted as active.
+#   2. Render spins a free-tier web service down after ~15 minutes of
+#      inactivity - a much more aggressive threshold, which is why this runs
+#      every 10 minutes rather than the old every-3-days schedule (that
+#      cadence only ever addressed the Supabase side of this).
 #
-# IMPORTANT: this workflow is INERT until the Railway deployment is actually
-# live. https://api.bssupport.care/health is a placeholder - update it to the
-# real deployed URL once Railway is set up, or every scheduled run below will
-# just fail with a connection error.
+# The response is checked explicitly for HTTP 200, not just "did curl not
+# crash" - a broken deploy (or a 4xx/5xx/redirect from the health endpoint)
+# fails this job outright, so it shows up as a red X in the Actions tab
+# instead of a silently-green checkmark that isn't actually confirming
+# anything.
 
 on:
   schedule:
-    - cron: "0 6 */3 * *" # every 3 days at 06:00 UTC
+    - cron: "*/10 * * * *" # every 10 minutes
   workflow_dispatch: {} # allows a manual "Run workflow" click for testing
 
 jobs:
@@ -19,4 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping backend health check
-        run: curl -sf --max-time 15 https://api.bssupport.care/health
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://api.bssupport.care/health)
+          echo "Health check responded with HTTP $status"
+          if [ "$status" != "200" ]; then
+            echo "::error::Health check failed - expected HTTP 200, got $status"
+            exit 1
+          fi
