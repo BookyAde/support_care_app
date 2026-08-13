@@ -5,7 +5,6 @@ import PublicNav from "@/components/PublicNav";
 import { apiFetch } from "@/lib/api";
 import Button from "@/components/ui/Button";
 import { TextField, TextAreaField, SelectField } from "@/components/ui/Field";
-import { HeartHandshake } from "lucide-react";
 
 const CARE_TYPES = [
   "Mobility assistance",
@@ -67,12 +66,14 @@ export default function RequestCarePage() {
     return (
       <div className="min-h-screen bg-paper">
         <PublicNav />
-        <section className="max-w-lg mx-auto px-6 pt-24 pb-24 text-center">
-          <div className="w-14 h-14 rounded-full bg-moss/12 text-moss-deep flex items-center justify-center mx-auto mb-6">
-            <HeartHandshake className="w-6 h-6" />
-          </div>
-          <h1 className="font-display text-3xl font-bold mb-3">Thank you for reaching out</h1>
-          <p className="text-[15px] text-ink/65 leading-relaxed">
+        <section className="max-w-2xl mx-auto px-6 pt-24 pb-24">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-moss-deep mb-3">
+            Request received
+          </p>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5">
+            Thank you for reaching out
+          </h1>
+          <p className="text-[15px] text-ink/65 leading-relaxed max-w-lg border-l-2 border-moss pl-5">
             We&apos;ve received your request and our team will be in touch soon. If this is urgent,
             please also feel free to call us directly.
           </p>
@@ -85,15 +86,19 @@ export default function RequestCarePage() {
     <div className="min-h-screen bg-paper">
       <PublicNav />
 
-      <section className="max-w-2xl mx-auto px-6 pt-16 pb-20">
-        <div className="text-center mb-10">
-          <h1 className="font-display text-4xl font-bold mb-4">Request care</h1>
-          <p className="text-[15px] text-ink/65">
-            Tell us a bit about who needs support, and our team will follow up to talk through next steps.
-          </p>
-        </div>
+      {/* MASTHEAD */}
+      <section className="max-w-2xl mx-auto px-6 pt-16 sm:pt-20 pb-4">
+        <p className="font-mono text-[11px] uppercase tracking-widest text-teal-deep mb-3">Care requests</p>
+        <h1 className="font-display text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+          Request care
+        </h1>
+        <p className="text-[15px] text-ink/60 max-w-lg">
+          Tell us a bit about who needs support, and our team will follow up to talk through next steps.
+        </p>
+      </section>
 
-        <form onSubmit={handleSubmit} className="bg-paper-raised border border-black/10 rounded-lg p-6 space-y-6">
+      <section className="max-w-2xl mx-auto px-6 pb-24">
+        <form onSubmit={handleSubmit}>
           {/* Honeypot: visually hidden off-screen (not display:none) so it stays in the accessibility
               tree but is invisible and untabbable to real visitors, while bots that auto-fill every
               input still catch it. */}
@@ -113,113 +118,142 @@ export default function RequestCarePage() {
             />
           </div>
 
-          <div>
-            <p className="text-[13px] font-bold mb-3">Your details</p>
-            <div className="space-y-4">
-              <TextField
-                label="Your name"
-                required
-                value={form.requester_name}
-                onChange={(e) => updateField("requester_name", e.target.value)}
-                placeholder="Jane Smith"
-              />
-              <TextField
-                label="Relationship to the person needing care"
-                required
-                value={form.requester_relationship}
-                onChange={(e) => updateField("requester_relationship", e.target.value)}
-                placeholder="Daughter, son, spouse, friend..."
-              />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* 01 Who's asking */}
+          <div className="grid grid-cols-[44px_1fr] sm:grid-cols-[70px_1fr] gap-5 sm:gap-10 pt-10 sm:pt-14 pb-10 sm:pb-14 border-t-2 border-ink">
+            <p className="font-mono text-[13px] text-ink/30 pt-0.5">01</p>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-widest text-teal-deep mb-5">
+                Who&apos;s asking
+              </p>
+              <div className="space-y-4 max-w-md">
                 <TextField
-                  label="Phone number"
-                  type="tel"
+                  label="Your name"
                   required
-                  value={form.requester_phone}
-                  onChange={(e) => updateField("requester_phone", e.target.value)}
-                  placeholder="07000000000"
+                  value={form.requester_name}
+                  onChange={(e) => updateField("requester_name", e.target.value)}
+                  placeholder="Jane Smith"
                 />
                 <TextField
-                  label="Email"
-                  type="email"
+                  label="Relationship to the person needing care"
                   required
-                  value={form.requester_email}
-                  onChange={(e) => updateField("requester_email", e.target.value)}
-                  placeholder="name@example.com"
+                  value={form.requester_relationship}
+                  onChange={(e) => updateField("requester_relationship", e.target.value)}
+                  placeholder="Daughter, son, spouse, friend..."
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <TextField
+                    label="Phone number"
+                    type="tel"
+                    required
+                    value={form.requester_phone}
+                    onChange={(e) => updateField("requester_phone", e.target.value)}
+                    placeholder="07000000000"
+                  />
+                  <TextField
+                    label="Email"
+                    type="email"
+                    required
+                    value={form.requester_email}
+                    onChange={(e) => updateField("requester_email", e.target.value)}
+                    placeholder="name@example.com"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 02 Who needs care */}
+          <div className="grid grid-cols-[44px_1fr] sm:grid-cols-[70px_1fr] gap-5 sm:gap-10 py-10 sm:py-14 border-t border-black/10">
+            <p className="font-mono text-[13px] text-ink/30 pt-0.5">02</p>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-widest text-ochre-deep mb-5">
+                Who needs care
+              </p>
+              <div className="space-y-4 max-w-md">
+                <TextField
+                  label="Their name"
+                  required
+                  value={form.care_recipient_name}
+                  onChange={(e) => updateField("care_recipient_name", e.target.value)}
+                  placeholder="John Smith"
+                />
+                <TextField
+                  label="Their address"
+                  required
+                  value={form.care_recipient_address}
+                  onChange={(e) => updateField("care_recipient_address", e.target.value)}
+                  placeholder="15 Oxford Road, Oxford"
                 />
               </div>
             </div>
           </div>
 
-          <div>
-            <p className="text-[13px] font-bold mb-3">Who needs care</p>
-            <div className="space-y-4">
-              <TextField
-                label="Their name"
-                required
-                value={form.care_recipient_name}
-                onChange={(e) => updateField("care_recipient_name", e.target.value)}
-                placeholder="John Smith"
-              />
-              <TextField
-                label="Their address"
-                required
-                value={form.care_recipient_address}
-                onChange={(e) => updateField("care_recipient_address", e.target.value)}
-                placeholder="15 Oxford Road, Oxford"
-              />
-            </div>
-          </div>
+          {/* 03 What kind of care */}
+          <div className="grid grid-cols-[44px_1fr] sm:grid-cols-[70px_1fr] gap-5 sm:gap-10 py-10 sm:py-14 border-t border-black/10">
+            <p className="font-mono text-[13px] text-ink/30 pt-0.5">03</p>
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-widest text-moss-deep mb-5">
+                What kind of care
+              </p>
+              <div className="max-w-md space-y-6">
+                <div>
+                  <p className="text-[13px] font-bold mb-3">What kind of support is needed</p>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {CARE_TYPES.map((type) => (
+                      <label key={type} className="flex items-center gap-2 text-[13.5px] text-ink/75">
+                        <input
+                          type="checkbox"
+                          checked={careTypes.includes(type)}
+                          onChange={() => toggleCareType(type)}
+                          className="w-4 h-4 accent-teal"
+                        />
+                        {type}
+                      </label>
+                    ))}
+                  </div>
+                </div>
 
-          <div>
-            <p className="text-[13px] font-bold mb-3">What kind of support is needed</p>
-            <div className="grid grid-cols-2 gap-2.5">
-              {CARE_TYPES.map((type) => (
-                <label key={type} className="flex items-center gap-2 text-[13.5px] text-ink/75">
+                <SelectField
+                  label="How often is care needed"
+                  value={form.frequency}
+                  onChange={(e) => updateField("frequency", e.target.value)}
+                >
+                  <option value="">Select an option</option>
+                  {FREQUENCIES.map((f) => (
+                    <option key={f} value={f}>
+                      {f}
+                    </option>
+                  ))}
+                </SelectField>
+
+                <TextAreaField
+                  label="Anything else we should know"
+                  rows={3}
+                  value={form.additional_notes}
+                  onChange={(e) => updateField("additional_notes", e.target.value)}
+                  placeholder="Medical conditions, preferences, anything that helps us understand the situation"
+                />
+
+                <label className="flex items-center gap-2.5 text-[13.5px] font-bold text-brick-deep">
                   <input
                     type="checkbox"
-                    checked={careTypes.includes(type)}
-                    onChange={() => toggleCareType(type)}
-                    className="w-4 h-4 accent-teal"
+                    checked={form.is_urgent}
+                    onChange={(e) => updateField("is_urgent", e.target.checked)}
+                    className="w-4 h-4 accent-brick"
                   />
-                  {type}
+                  This is urgent
                 </label>
-              ))}
+              </div>
             </div>
           </div>
 
-          <SelectField
-            label="How often is care needed"
-            value={form.frequency}
-            onChange={(e) => updateField("frequency", e.target.value)}
-          >
-            <option value="">Select an option</option>
-            {FREQUENCIES.map((f) => (
-              <option key={f} value={f}>{f}</option>
-            ))}
-          </SelectField>
-
-          <TextAreaField
-            label="Anything else we should know"
-            rows={3}
-            value={form.additional_notes}
-            onChange={(e) => updateField("additional_notes", e.target.value)}
-            placeholder="Medical conditions, preferences, anything that helps us understand the situation"
-          />
-
-          <label className="flex items-center gap-2.5 text-[13.5px] font-bold text-brick-deep">
-            <input
-              type="checkbox"
-              checked={form.is_urgent}
-              onChange={(e) => updateField("is_urgent", e.target.checked)}
-              className="w-4 h-4 accent-brick"
-            />
-            This is urgent
-          </label>
-
-          <Button type="submit" disabled={submitting} fullWidth>
-            {submitting ? "Sending..." : "Send request"}
-          </Button>
+          <div className="pl-16 sm:pl-27.5 pb-10">
+            <div className="max-w-md">
+              <Button type="submit" disabled={submitting} fullWidth>
+                {submitting ? "Sending..." : "Send request"}
+              </Button>
+            </div>
+          </div>
         </form>
       </section>
     </div>
