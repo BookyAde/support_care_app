@@ -43,6 +43,23 @@ body {
   to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
+/* Slow continuous zoom for full-bleed photo backgrounds (hero, CTA band) -
+   runs independently of any crossfade, so a photo is always mid-zoom by the
+   time it's revealed rather than starting fresh. */
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* Scroll-cue dot: fades in at the top of its track, travels down, fades out
+   - a small looping nudge rather than a static arrow. */
+@keyframes scrollCue {
+  0% { transform: translateY(0); opacity: 0; }
+  30% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(28px); opacity: 0; }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

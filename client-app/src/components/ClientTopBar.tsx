@@ -15,7 +15,7 @@ export default function ClientTopBar() {
 
   return (
     <header className="sticky top-0 z-40 h-14 bg-ink text-paper-raised flex items-center justify-between px-4">
-      <img src="/bountiful-white-lockup.png" alt="Bountiful Support Plus" className="h-6" />
+      <img src="/new_logo_white.png" alt="Bountiful Support Plus" className="h-6" />
       <div className="flex items-center">
         <Link
           href="/profile"

@@ -13,7 +13,7 @@ const zillaSlab = Zilla_Slab({
 export const metadata: Metadata = {
   title: "Bountiful Support Plus Worker",
   description: "Support Care Management, worker app",
-  icons: { icon: "/bountiful-favicon-32.png" },
+  icons: { icon: "/new_favicon_32.png" },
 };
 
 export default function RootLayout({

@@ -64,7 +64,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
   return (
     <div className="min-h-screen flex">
       <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-ink text-paper-raised flex items-center justify-between px-4 z-40">
-        <img src="/bountiful-white-lockup.png" alt="Bountiful Support Plus" className="h-6" />
+        <img src="/new_logo_white.png" alt="Bountiful Support Plus" className="h-6" />
         <button
           onClick={() => setMobileOpen(true)}
           aria-label="Open menu"
@@ -87,7 +87,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         }`}
       >
         <div className="shrink-0 px-6 py-7 border-b border-white/10 flex items-center justify-between">
-          <img src="/bountiful-white-lockup.png" alt="Bountiful Support Plus" className="h-9" />
+          <img src="/new_logo_white.png" alt="Bountiful Support Plus" className="h-9" />
           <button
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu"

@@ -19,7 +19,7 @@ export default function PublicNav() {
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-black/10">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
         <Link href="/" className="shrink-0">
-          <img src="/bountiful-color-lockup.png" alt="Bountiful Support Plus" className="h-8" />
+          <img src="/new_logo_lockup.png" alt="Bountiful Support Plus" className="h-8" />
         </Link>
 
         <nav className="hidden sm:flex items-center gap-6">

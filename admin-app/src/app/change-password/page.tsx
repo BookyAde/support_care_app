@@ -58,7 +58,7 @@ export default function ChangePasswordPage() {
 
       <div className="w-full max-w-sm relative">
         <div className="flex justify-center mb-8">
-          <img src="/bountiful-color-lockup.png" alt="Bountiful Support Plus" className="h-12" />
+          <img src="/new_logo_lockup.png" alt="Bountiful Support Plus" className="h-12" />
         </div>
 
         <form
